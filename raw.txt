@@ -1,0 +1,282 @@
+app.py
+
+import os
+from flask import Flask, render_template, request, redirect, session, url_for
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
+import bcrypt
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'secret_key'
+
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    profile_photo = db.Column(db.String(100), nullable=True)
+
+    def __init__(self, name, email, password, profile_photo=None):
+        self.name = name
+        self.email = email
+        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        self.profile_photo = profile_photo
+
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))
+
+def recreate_db():
+    db.drop_all()
+    db.create_all()
+
+with app.app_context():
+    recreate_db()
+
+@app.route('/')
+def index():
+    return "Hi"
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        photo = request.files['photo']
+        
+        if photo:
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            filename = None
+        
+        new_user = User(name=name, email=email, password=password, profile_photo=filename)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect('/login')
+        
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        
+        user = User.query.filter_by(email=email).first()
+        
+        if user and user.check_password(password):
+            session['user_id'] = user.id
+            session['name'] = user.name
+            session['email'] = user.email
+            session['profile_photo'] = user.profile_photo
+            return redirect('/dashboard')
+        else:
+            error = 'Invalid email or password'
+            return render_template('login.html', error=error)
+ 
+    return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        return render_template('dashboard.html', user=user)
+    return redirect('/login')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    session.pop('name', None)
+    session.pop('email', None)
+    session.pop('profile_photo', None)
+    return redirect('/login')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
+*******************************************************************
+
+login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+  .reg {
+    color: red;
+  }
+</style>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <h2>Login Form</h2>
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="pwd">Password</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button> <br><br><br>
+        or<br><br>
+        <p class="justify-content-center">New user?</p>
+        <a href="/register" class="reg">Register</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+****************************************************************************
+
+register.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+  .reg {
+    color: red;
+  }
+</style>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <h2>Register Form</h2>
+      <form action="/register" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="pwd">Password</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="photo">Profile Photo</label>
+          <input type="file" class="form-control" id="photo" name="photo">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button> <br><br><br>
+        or<br><br>
+        <p class="justify-content-center">Already have an account?</p>
+        <a href="/login" class="reg">Login</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+*************************************************************************************************
+dashboard.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <h2>User Dashboard</h2>
+      <p>Welcome, {{ user.name }}!</p>
+      <p><b>Name: </b>{{ user.name }}</p>
+      <p><b>Email: </b>{{ user.email }}</p>
+      <p><b>Password: </b>{{ user.password }}</p>
+      {% if user.profile_photo %}
+        <p><b>Profile Photo:</b></p>
+        <img src="{{ url_for('static', filename='uploads/' + user.profile_photo) }}" alt="Profile Photo" class="img-responsive">
+      {% endif %}
+      <br>
+      <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+****************************************************************************
+try - dashboard
+
+
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>PDF Files</h3>
+      <ul>
+        {% for file in files %}
+        <li><a href="{{ url_for('download', file_id=file.id) }}">{{ file.display_name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <h3>YouTube Videos</h3>
+      <ul>
+        {% for link in youtube_links %}
+        <li><a href="{{ link.url }}" target="_blank">{{ link.display_name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+

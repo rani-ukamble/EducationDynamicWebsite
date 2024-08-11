@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    .profile-link {
+      float: right;
+      margin: 15px;
+    }
+    .profile-photo {
+      max-width: 100px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    h2 {
+      color: red;
+    }
+    .card {
+      border: 1px solid #ddd;  /* Set border color */
+      border-radius: 4px;      /* Optional: Round corners */
+      padding: 15px;           /* Add padding inside the card */
+      background-color: #f9f9f9; /* Optional: Light background for contrast */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .card-body {
+      padding: 10px;  /* Add some padding to the body */
+    }
+    .btn {
+      margin-top: 10px;  /* Add some margin between buttons */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-3px);  /* Slightly lift the button on hover */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+    }
+    .btn-secondary {
+      background-color: orange;
+      border-color: #6c757d;
+      color: #fff;
+    }
+  
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 mt-4">
+      <h2>User Dashboard</h2>
+      <!-- Profile link -->
+      <a href="#" class="btn btn-default profile-link" data-toggle="modal" data-target="#profileModal">
+        <span class="glyphicon glyphicon-user"></span> Profile
+      </a>
+      <br><br>
+      <p>Welcome, {{ user.name }}!</p>
+
+      <!-- Profile Modal -->
+      <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="profileModalLabel">Profile Information</h4>
+            </div>
+            <div class="modal-body">
+              {% if user.profile_photo %}
+                <p><b>Profile Photo:</b></p>
+                <!-- Lightbox link -->
+                <a href="{{ url_for('static', filename='uploads/' + user.profile_photo) }}" data-lightbox="profile" data-title="Profile Photo">
+                  <img src="{{ url_for('static', filename='uploads/' + user.profile_photo) }}" alt="Profile Photo" class="profile-photo">
+                </a>
+              {% endif %}
+              <p><b>Name: </b>{{ user.name }}</p>
+              <p><b>Email: </b>{{ user.email }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <h2>Available PDFs</h2>
+
+  <div class="container">
+    <div class="row mt-5">
+      {% for file in files %}
+      <div class="col-sm-3 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ file.display_name }}</h5>
+            <a href="{{ url_for('uploaded_file', filename=file.filename) }}" class="btn btn-secondary">View</a>
+            <a href="{{ url_for('download', file_id=file.id) }}" class="btn btn-primary">Download</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div><br><br>
+
+    <h2>Available YouTube Videos</h2>
+    <div class="row mt-5">
+      {% for link in youtube_links %}
+      <div class="col-sm-3 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ link.display_name }}</h5>
+            <a href="{{ link.url }}" target="_blank" class="btn btn-secondary">Watch</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

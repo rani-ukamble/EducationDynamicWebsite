@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+  .profile-link {
+    float: right;
+    margin: 15px;
+  }
+  h3{
+    color:red;
+  }
+</style>
+
+<body>
+
+<div class="container">
+  <div class="profile-link">
+    <a href="/" class="btn btn-danger">Logout</a>
+  </div>
+    <h2>Admin Dashboard</h2><br>
+
+    <form action="/admin" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="password">Admin Password:</label>
+          <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        
+        <div id="pdf-uploads">
+          <div class="form-group">
+            <label for="file">Select PDFs:</label>
+            <input type="file" class="form-control" id="file" name="file" accept=".pdf" multiple>
+          </div>
+          <div class="form-group">
+            <label for="display_name">Display Names (comma-separated):</label>
+            <input type="text" class="form-control" id="display_name" name="display_name" placeholder="Enter display names for each PDF, comma-separated">
+          </div>
+        </div>
+
+        <div id="youtube-uploads" class="mt-4">
+          <div class="form-group">
+            <label for="yt_url">YouTube URLs (comma-separated):</label>
+            <input type="text" class="form-control" id="yt_url" name="yt_url" placeholder="Enter YouTube URLs, comma-separated">
+          </div>
+          <div class="form-group">
+            <label for="yt_display_name">YouTube Display Names (comma-separated):</label>
+            <input type="text" class="form-control" id="yt_display_name" name="yt_display_name" placeholder="Enter display names for each YouTube link, comma-separated">
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    <br> <br>
+    <h3>Uploaded PDFs</h3>
+
+    <div class="row mt-5">
+      {% for file in files %}
+      <div class="col-sm-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ file.display_name }}</h5>
+            <a href="{{ url_for('uploaded_file', filename=file.filename) }}" class="btn btn-secondary">View</a>
+            <a href="{{ url_for('download', file_id=file.id) }}" class="btn btn-primary">Download</a>
+            <a href="{{ url_for('delete', file_id=file.id) }}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div><br>
+    <h3>Uploaded YouTube Videos</h3>
+
+    <div class="row mt-5">
+      {% for link in youtube_links %}
+      <div class="col-sm-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ link.display_name }}</h5>
+            <a href="{{ link.url }}" target="_blank" class="btn btn-secondary">Watch</a>
+            <a href="{{ url_for('delete_link', link_id=link.id) }}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

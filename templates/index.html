@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+  <link rel="stylesheet" href="style.css">
+  
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+    
+    
+    .nav a:hover {
+        color: red;
+    }
+    
+    #about-text {
+        /* background-color:  #f59e0b; */
+        /* background-color:  white; */
+        color: darkblue;
+    }
+    
+    #about-text h1 {
+        font-size: 5rem;
+        font-weight: bold;
+    
+    }
+    
+    #about-text p {
+        font-size: 1.5rem;
+    
+    }
+    
+    .header {
+        height: 100vh;
+        position: relative;
+    }
+    
+    .navbar-style {
+        box-shadow: 0 5px 10px #efefef;
+        text-transform: uppercase;
+    }
+    
+    .logo {
+        height: 48px;
+        padding: 2px 10px;
+    }
+    
+    .icon-bar {
+        background: darkblue;
+    }
+    
+    li a {
+        color: darkblue;
+    }
+    
+    .navbar-header a {
+        color: darkblue;
+        text-decoration: none;
+    }
+    
+    
+    
+    
+    .content {
+        background-image: linear-gradient(rgba(3, 6, 25, 0.7), rgba(6, 2, 73, 0.7)), url('static/images/a1.jpg');
+        /* 
+        background-image: linear-gradient(rgba(26, 1, 35, 0.7), rgba(44, 1, 1, 0.7)), url('static/images/a1.jpg'); */
+        background-size: cover;
+        background-position: center;
+        height: 80vh;
+        /* Adjust as needed */
+        display: flex;
+        flex-direction: column;
+        /* Stack items vertically */
+        align-items: center;
+        /* Center horizontally */
+        justify-content: center;
+        /* Center vertically */
+        color: white;
+        text-align: center;
+        /* Center text within the content */
+        margin: 0;
+        padding: 20px;
+        /* Optional: Add padding if needed */
+    }
+    
+    .content h1 {
+        font-size: 4.5em;
+        /* Increase the font size */
+        font-weight: bold;
+        margin-bottom: 20px;
+        white-space: nowrap;
+        /* Ensure the text is on a single line */
+    }
+    
+    .content p {
+        font-size: 1.7rem;
+    }
+    
+    
+    
+    @media (max-width: 768px) {
+        .content h1 {
+            font-size: 3rem;
+            /* Smaller size for tablets */
+        }
+    
+        .content p {
+            font-size: 1rem;
+            /* Smaller size for tablets */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .content h1 {
+            font-size: 2.1rem;
+            /* Smaller size for mobile devices */
+        }
+    
+        .content p {
+            font-size: 1.4rem;
+            /* Smaller size for mobile devices */
+        }
+    }
+    
+    
+    
+    /* #about-text{
+        background-image: linear-gradient(rgba(247, 183, 80, 0.7), rgba(182, 14, 14, 0.7));
+        
+    } */
+    
+    #c1 {
+        /* background-color: darkblue; */
+        /* background-image: #2a0123; */
+        color: darkblue;
+        border-radius: 5px;
+    }
+    
+    #c1 h3 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    #c1 p {
+        font-size: 1.7rem;
+        font-weight: lighter;
+    }
+    
+    
+    .card {
+        /* background-image: linear-gradient(rgba(3, 0, 11, 0.7), rgba(77, 6, 255, 0.7)); */
+        color: darkblue;
+    
+    }
+    
+    #info1 {
+        border-radius: 30px;
+        box-shadow: rgb(40, 40, 43) 2px;
+        border: solid darkblue 2px;
+    }
+    
+    .card-body h3 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .card-body p {
+        font-size: 1.7rem;
+        font-weight: lighter;
+    }
+    
+    .card-body:hover {
+        /* box-shadow: 0px 0px 8px 8px rgba(1, 9, 79, 0.7); */
+        transition: box-shadow 0.3s ease-in-out;
+        border-color: black;
+    }
+    
+    .card-text {
+        padding: 5px;
+    }
+    
+    .fixed-height {
+        border-radius: 40px;
+    }
+    
+    #expert {
+        /* background-image: linear-gradient(rgba(98, 94, 108, 0.7), rgba(153, 149, 212, 0.7)); */
+        color: darkblue;
+    }
+    
+    #expert h3 {
+        font-size: 3.5rem;
+        font-weight: bold;
+    }
+    
+    .img-fluid {
+        align-items: center;
+    }
+    
+    .responsive {
+        max-width: 100%;
+        height: auto;
+        align-items: center;
+    }
+    
+    #pk {
+        color: darkblue;
+    }
+    
+    #pk h3 {
+        font-weight: bold;
+    }
+    
+    .br {
+        color: darkblue;
+        font-size: 4.5rem;
+        font-weight: bold;
+    }
+    
+    .pk1 {
+        color: darkblue;
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .pk1 h3:hover {
+        color: rgb(214, 245, 43);
+    }
+    
+    
+    
+    
+    .card1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        /* Space between cards */
+    }
+    
+    .p1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    
+    .card-img-top {
+        height: 200px;
+        /* Set a fixed height for all images */
+        object-fit: cover;
+        /* Ensures the images cover the set height and width without distortion */
+    }
+    
+    
+    
+    #c {
+        /* background-image: linear-gradient(rgba(3, 0, 11, 0.7), rgba(77, 6, 255, 0.7)); */
+        color: darkblue;
+    }
+    
+    .card-body h3 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .card-body p {
+        font-size: 1.7rem;
+        font-weight: lighter;
+    }
+    
+    .say {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: darkblue;
+    }
+    
+    video {
+        width: 100%;
+        height: auto;
+    }
+    
+    .review {
+        color: darkblue;
+        /* Bootstrap primary color */
+        text-decoration: none;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+        text-align: center;
+    }
+    
+    .review:hover {
+        color: red;
+        /* Darker shade on hover */
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .testimonial {
+        border: 1px solid darkblue;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        /* background-color: #fff3f3; */
+        /* background-color: rgb(249, 248, 251); */
+    }
+    
+    .testimonial h4 {
+        margin-top: 10px;
+        color: darkblue;
+    }
+    
+    .testimonial p {
+        color: darkblue;
+        margin-bottom: 10px;
+    }
+    
+    .testimonial .fa {
+        color: red;
+    }
+    
+    
+    .test {
+        border: 1.5px solid darkblue;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 25px;
+        background-color: rgb(249, 248, 251);
+        color: darkblue;
+    }
+    
+    .test:hover {
+        box-shadow: 0px 0px 10px 8px rgba(2, 6, 51, 0.7);
+        transition: box-shadow 0.3s ease-in-out;
+        border-color: black;
+    }
+    
+    #c1 {
+        background-color: rgb(243, 241, 247);
+    
+    }
+    
+    .test h3 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+    
+    .test p {
+        text-align: justify;
+        font-weight: lighter;
+        font-size: 1.7rem;
+    }
+    
+    
+    
+    
+    
+    .carousel-inner img {
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Ensures images cover the area without distortion */
+      }
+      .carousel {
+        margin-bottom: 0;
+        padding-bottom: 0; /* Ensure no padding is added below the carousel */
+      }
+      .carousel-control {
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for controls */
+      }
+      @media (max-width: 768px) {
+        .carousel-inner img {
+          height: 60vh; /* Adjust height for mobile screens if needed */
+        }
+      }
+    
+    #about-text h1 {
+        font-size: 5rem;
+        font-weight: bold;
+    
+    }
+    
+    #about-text p {
+        font-size: 1.5rem;
+    
+    }
+    
+    
+    .info-section {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+    
+    .info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .comment-box,
+    .location {
+        padding: 10px;
+        margin-bottom: 20px;
+        /* Ensure space between rows on smaller screens */
+    }
+    
+    .comment-form input,
+    .comment-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        outline: none;
+        background: #f0f0f0;
+    }
+    
+    .comment-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: darkblue;
+        /* Adjust to your design */
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .comment-form button:hover {
+        background-color: #e64a19;
+        /* Adjust to your design */
+    }
+    
+    .location iframe {
+        width: 100%;
+        height: 300px;
+        border: 0;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767px) {
+    
+        .comment-box,
+        .location {
+            width: 100%;
+        }
+    }
+    
+    #contact1 h2 {
+        font-size: 5rem;
+        font-weight: bold;
+        color: darkblue;
+    }
+    
+    #gallery p{
+        font-size: 2rem;
+        color: darkblue;
+        font-weight: lighter;
+    }
+    
+    #gallery h2 {
+        font-size: 5rem;
+        font-weight: bold;
+        color: darkblue;
+    }
+    
+    .footer {
+        background: darkblue;
+        color:white;
+        padding: 20px 0;
+      }
+      .footer h2 {
+        color:white;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      .footer p, .footer a {
+        color: white;
+        font-size: 14px;
+        font-weight: lighter;
+        line-height: 1.5;
+      }
+      .footer a:hover {
+        color: white;
+        text-decoration: none;
+      }
+      .footer .social-links a {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+      .footer .social-links a:hover {
+        color: white;
+      }
+      
+      .footer-bottom {
+        background: #060606;
+        padding: 10px 0;
+        text-align: center;
+      }
+      .footer-bottom a {
+        color:white;
+        text-decoration: none;
+      }
+      .footer-bottom a:hover {
+        text-decoration: underline;
+        color: yellow;
+      } 
+     
+    
+     
+      
+      .carousel-inner img {
+        width: 100%;
+        height: 450px;
+        object-fit: cover; /* Ensures images cover the area without distortion */
+      }
+      .carousel {
+        margin-bottom: 0;
+        padding-bottom: 0; /* Ensure no padding is added below the carousel */
+      }
+      .carousel-control {
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for controls */
+      }
+      @media (max-width: 768px) {
+        .carousel-inner img {
+          height: 60vh; /* Adjust height for mobile screens if needed */
+        }
+      }
+      .log{
+        color:red;
+      }
+  </style>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-style" id="home">
+    <div class="container">
+      <header class="header">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#micon">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href=""><img class="logo" src="static/images/l.jpeg" alt="Logo"><b>AIS</b></a>
+        </div>
+        <div class="collapse navbar-collapse" id="micon">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="{{ url_for('login') }}" class="log">Log In</a></li>
+            <li><a href="{{ url_for('admin') }}" class="log">Admin</a></li>
+
+          </ul>
+        </div>
+
+        <div class="content" id="institute-name">
+          <b>
+            <h1>Ambhira Institute of Science</h1>
+            <p>Learn, Grow, Achieve Transforming Students into Champions</p>
+
+        </div>
+    </div>
+    </div>
+    </header>
+    </div>
+  </nav>
+
+
+  <!-- about  -->
+  <div class="container" id="about">
+    <div class="jumbotron text-center" id="about-text">
+      <h1>About Us</h1>
+      <h4>आंभिरा इन्स्टिट्यूट ऑफ सायन्समध्ये आपले स्वागत आहे. </h4>
+      <p>Welcome to Ambhira Institute of Science, a premier educational hub dedicated to empowering students to achieve
+        academic excellence. With a passion for learning and a commitment to quality, we offer comprehensive online and
+        offline classes for students of all ages.</p>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-md-6" id="c1">
+        <div class="p-3 text-white"><br>
+          <h3>आमच्या सर्विसेस:</h3>
+          <h3>
+            <p>* प्राथमिक ते माध्यमिक शिक्षण: 1ली ते 10वी <br><br> * उच्च माध्यमिक शिक्षण: 11वी आणि 12वी (सायन्स)
+              <br><br>
+
+              * स्पर्धात्मक परीक्षा तयारी: नवोदय, स्कॉलरशिप, NMMS, MTS <br><br>
+
+              * इंजिनियरिंग आणि मेडिकल प्रवेश परीक्षांची तयारी: CET, JEE Main, NEET
+            </p><br>
+          </h3>
+        </div>
+      </div>
+      <div class="col-md-6 bg-info" id="c1">
+        <div class="p-3 text-white">
+          <br>
+          <h3>आमची वैशिष्ट्ये</h3>
+          <h3>
+            <p>* सखोल आणि वैयक्तिक मार्गदर्शन <br><br>* अनुभवी आणि कुशल शिक्षकवर्ग <br><br>
+
+              * अत्याधुनिक शैक्षणिक साधने आणि सोयी <br><br>
+
+              * विशेष एक्स्ट्रा क्लासेस </p><br>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="test">
+          <h3 class="text-white">Mission</h3>
+          <p class="card-text text-white">
+            Our mission is to provide personalized guidance and support to students, helping them unlock their full
+            potential and succeed in an increasingly competitive world. We proudly stand as a beacon of educational
+            excellence, shaping the minds of future leaders and change-makers.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="test">
+          <h3 class="text-white">Philosophy</h3>
+          <p class="card-text text-white">
+            Student-centric approach, focusing on individual needs and goals. <br>
+            Foster a supportive community, encouraging collaboration and growth. <br>
+            Emphasize conceptual clarity, critical thinking, and problem-solving skills.
+          </p><br><br>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="test">
+          <h3 class="text-white">Promise</h3>
+          <p class="card-text text-white">
+            Deliver high-quality education, accessible and affordable. <br>
+            Provide personalized attention, guidance, and mentorship. <br>
+            Empower students to achieve their academic goals and succeed in their chosen paths.
+          </p><br>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="container">
+      <p>
+      <div class="jumbotron text-center" id="expert">
+        <h3>Our Expertise</h3>
+        <p>Comprehensive preparation for competitive exams: <br> CAT, CBSE Board, Civil Services, CTET, GATE, JEE, NEET,
+          SSC CGL, SSC Government, and UGC Net <br>
+
+          Foundational learning for students from Class 1 to 12, fostering a strong academic base <br>
+
+          Experienced instructors, proven methodologies, and engaging curriculum ensure holistic development </p><br>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="jumbotron text-center" id="pk">
+
+
+            <h2 class="br">Ambedkar Bhimrao Ramji Institute of Science</h2>
+
+            <h3>Founder : P.K. Sir</h3>
+
+          </div>
+        </div>
+        <div class="col-md-8 d-flex align-items-center">
+          <!-- <img src="images/sir.jpg" class="img-fluid" alt="Responsive image"> -->
+          <img src="static/images/sir.jpg" alt="Nature" class="responsive" width="800" height="600">
+        </div>
+      </div>
+
+    </div>
+    <h3 class="pk1">Prof. Prakash Kamble(P.K. sir) - M.Sc Physics</h3>
+    <br><br>
+  </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- Column 1 -->
+      <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="card" id="c">
+          <div class="card-body text-center" id="cid">
+            <img src="static/images/madam.jpeg" class="card-img-top" alt="Ms. Pratibha Kamble">
+            <p class="card-text">Ms. Pratibha Kamble <br> B.A. (English)</p>
+          </div>
+        </div>
+      </div>
+      <!-- Column 2 -->
+      <div class="col-12 col-sm-6 col-md-4 mb-4" id="cid">
+        <div class="card" id="c">
+          <div class="card-body text-center">
+            <img src="static/images/rani.jpeg" class="card-img-top" alt="Miss. Rani Kamble">
+            <p class="card-text">Miss. Rani Kamble <br> B. Tech. - IT (Mathematics)</p>
+          </div>
+        </div>
+      </div>
+      <!-- Column 3 -->
+      <div class="col-12 col-sm-6 col-md-4 mb-4" id="cid">
+        <div class="card" id="c">
+          <div class="card-body text-center">
+            <img src="static/images/vk.jpeg" class="card-img-top" alt="Mr. Vikas Kamble">
+            <p class="card-text">Mr. Vikas Kamble <br> M. Pharmacy (Science)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <br>
+    <div class="jumbotron text-center">
+      <h2 class="say">What our students say?</h2>
+    </div>
+    <video width="400" controls>
+      <source src="static/images/vid.mp4" type="video/mp4">
+    </video>
+
+    <br> <br>
+    <a
+      href="https://www.google.com/maps/place/Class+%7C+Academy+%7C+Tuition+%7C+Best+%7C+Ambhira+Institute+of+Science+%7C+best+%7C+Best+Tution+%7C+Science+School/@16.9880828,74.990691,13z/data=!4m8!3m7!1s0x3bc6cd0c8e236de9:0x3209099ef2ff2284!8m2!3d16.9876824!4d75.0241744!9m1!1b1!16s%2Fg%2F11vxcwrl17?entry=ttu">
+      <h4 class="review">Check Reviews (5.0)</h4>
+    </a><br> <br>
+
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="testimonial">
+          <p>Best ever teacher, especially for Science.</p>
+          <h4>Gorakh Chavan</h4>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="testimonial">
+          <p>Best teacher.</p>
+          <h4>Sanket Dahake</h4>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="testimonial">
+          <p>One of the best classes in Kokale.</p>
+          <h4>Dipak Pawar</h4>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="testimonial">
+          <p>Nice tuition, best tuition.</p>
+          <h4>Dhiraj Kamble</h4>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="testimonial">
+          <p>Great class.</p>
+          <h4>Ashish Mohite</h4>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="testimonial">
+          <p>The great Ambhira Institute of Science.</p>
+          <h4>Nandakumar Kamble</h4>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+<div id="gallery" class="container mt-5">
+  <h2 class="text-center">Gallery</h2>
+  <p class="text-center">Ambhira Institute of Science.</p>
+</div>
+
+<div class="container">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+      <li data-target="#myCarousel" data-slide-to="8"></li>
+      <li data-target="#myCarousel" data-slide-to="9"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="static/images/img1.jpg" alt="Los Angeles" class="d-block w-100">
+      </div>
+
+      <div class="item">
+        <img src="static/images/img3.jpg" alt="Chicago" class="d-block w-100">
+      </div>
+    
+      <div class="item">
+        <img src="static/images/img2.jpg" alt="New york" class="d-block w-100">
+      </div>
+
+      <div class="item">
+        <img src="static/images/img4.jpg" alt="Los Angeles" class="d-block w-100">
+      </div>
+
+      <div class="item">
+        <img src="static/images/img5.jpg" alt="Chicago" class="d-block w-100">
+      </div>
+    
+      <div class="item">
+        <img src="static/images/img6.jpeg" alt="New york" class="d-block w-100">
+      </div>
+
+      <div class="item">
+        <img src="static/images/i5.jpeg" alt="Los Angeles" class="d-block w-100">
+      </div>
+
+      <div class="item">
+        <img src="static/images/i3.jpeg" alt="Chicago" class="d-block w-100">
+      </div>
+    
+      <div class="item">
+        <img src="static/images/i4.jpg" alt="New york" class="d-block w-100">
+      </div>
+
+      <div class="item">
+        <img src="static/images/i1.jpg" alt="New york" class="d-block w-100">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="container">
+  <div class="info-section" id="contact">
+    <div class="jumbotron text-center" id="contact1">
+    <h2>Contact Us</h2>
+    </div>
+    <div class="info">
+      <div class="col-md-6 comment-box">
+        <form class="comment-form" action="https://formsubmit.co/ambhirainstitute@gmail.com" method="POST">
+          <input type="text" id="name" name="name" placeholder="Enter Name" required>
+          <input type="email" id="email" name="email" placeholder="Enter Email" required>
+          <textarea rows="5" id="message" name="message" placeholder="Your Message" required></textarea>
+          <button type="submit" value="Submit">Submit</button>
+        </form>
+      </div>
+      
+      <div class="col-md-6 location">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d61051.59648251011!2d74.990691!3d16.9880828!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc6cd0c8e236de9%3A0x3209099ef2ff2284!2sClass%20%7C%20Academy%20%7C%20Tuition%20%7C%20Best%20%7C%20Ambhira%20Institute%20of%20Science%20%7C%20best%20%7C%20Best%20Tution%20%7C%20Science%20School!5e0!3m2!1sen!2sin!4v1722159651109!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="container">
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="footer-section about">
+          <h2>About Us</h2>
+          <p>Our experienced instructors empower students to achieve their academic goals and succeed in competitive exams. Join us on the journey to academic excellence today! <br><br> आपल्या विद्यार्थीजीवनात यशस्वी होण्यासाठी आंभिरा इन्स्टिट्यूट ऑफ सायन्स, कोकळे येथे आजच सामील व्हा!</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="footer-section links">
+          <h2>Useful Links</h2>
+          <ul class="list-unstyled">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="footer-section social">
+          <h2>Follow Us</h2>
+          <div class="social-links">
+            <a href="https://t.me/abrpksir"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.instagram.com/abr.inst?igsh=ZHVyOTJzMmNhdWNm"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/prakash-kamble-b66b2a1b1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://youtube.com/@ambhirainstitute?si=0XOfHJE2FPy7hi-k"><i class="fab fa-youtube"></i></a>
+            <br><br> Mobile: 7774833305 (PK Sir) <br><br> आंभिरा इन्स्टिट्यूट ऑफ सायन्स, कोकळे
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="footer-bottom">
+    &copy; 2024 Ambhira Institute of Science | Designed by<a href="https://www.instagram.com/the_rani_kamble/"> Rani <a href="https://www.linkedin.com/in/rani-kamble-766006208/"> Kamble</a>
+  </div>
+</footer>
+</div>
+
+
+  <!-- Link to your JavaScript file -->
+   <script>
+    const newTitle = 'आंभिरा इन्स्टिट्यूट ऑफ सायन्स';
+const originalTitle = 'Ambhira Institute of Science';
+const originalSubtitle = 'Learn, Grow, Achieve: Transforming Students into Champions';
+const newSubtitle1 = 'आपल्या उज्ज्वल भविष्याची गुरुकिल्ली';
+const newSubtitle2 = 'आजच प्रवेश घ्या आणि आपल्या यशाचा पाया भरा!';
+let contentState = true;
+
+setInterval(() => {
+    const contentElement = document.getElementById('institute-name').getElementsByTagName('h1')[0];
+    const subtitleElement = document.getElementById('institute-name').getElementsByTagName('p')[0];
+
+    if (contentState) {
+        contentElement.innerText = newTitle;
+        subtitleElement.innerText = newSubtitle1;
+
+        // Switch to the secondary subtitle after 2.5 seconds
+        setTimeout(() => {
+            if (contentElement.innerText === newTitle) {
+                subtitleElement.innerText = newSubtitle2;
+            }
+        }, 2500);
+    } else {
+        contentElement.innerText = originalTitle;
+        subtitleElement.innerText = originalSubtitle;
+    }
+
+    contentState = !contentState;
+}, 5000);
+
+
+
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+
+
+
+
+   </script>
+  <script src="script.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</body>
+
+</html>
